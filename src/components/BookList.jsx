@@ -1,93 +1,121 @@
-// src/components/BookList.jsx
+// นำเข้า React hook: useState ใช้จัดการ state และ useEffect ใช้สำหรับ side effects (โหลดข้อมูลเมื่อ component เริ่มทำงาน)
 import { useState, useEffect } from "react";
+
+// นำเข้า CSS module สำหรับกำหนดสไตล์
 import styles from "./BookList.module.css";
+
+// นำเข้า function สำหรับดึงข้อมูลและบันทึกข้อมูลหนังสือ
 import { getBooks, saveBooks } from "../data/books";
 
+// ประกาศ component หลัก
 export default function BookList() {
+
+  // state สำหรับเก็บรายการหนังสือทั้งหมด
   const [books, setBooks] = useState([]);
+
+  // state สำหรับเก็บข้อความค้นหา
   const [searchTerm, setSearchTerm] = useState("");
+
+  // state สำหรับแสดง/ซ่อนฟอร์มเพิ่มหนังสือ
   const [showAddForm, setShowAddForm] = useState(false);
+
+  // state สำหรับเก็บข้อมูลหนังสือใหม่ที่ต้องการเพิ่ม
   const [newBook, setNewBook] = useState({ id: "", title: "" });
+
+  // state สำหรับเก็บ index ของหนังสือที่กำลังแก้ไขอยู่
   const [editIndex, setEditIndex] = useState(null);
+
+  // state สำหรับเก็บข้อมูลหนังสือที่กำลังแก้ไข
   const [editBook, setEditBook] = useState({ id: "", title: "" });
 
+  // โหลดข้อมูลหนังสือครั้งแรกตอนที่ component ถูก render
   useEffect(() => {
-    setBooks(getBooks());
+    setBooks(getBooks());  // ดึงข้อมูลหนังสือจาก storage หรือ mock data มาแสดง
   }, []);
 
+  // อัพเดตค่า searchTerm เมื่อผู้ใช้พิมพ์ในช่องค้นหา
   const handleSearch = (e) => setSearchTerm(e.target.value);
 
+  // filter รายการหนังสือ โดยใช้ searchTerm เปรียบเทียบทั้งชื่อหนังสือและรหัสหนังสือ
   const filteredBooks = books.filter(
     (book) =>
       book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       book.id.includes(searchTerm)
   );
 
+  // จัดการการยืมหรือคืนหนังสือ เปลี่ยนสถานะของหนังสือระหว่าง "ว่าง" และ "มีผู้ยืมแล้ว"
   const handleBorrowReturn = (index) => {
-    const updatedBooks = [...books];
-    const currentBook = updatedBooks[index];
+    const updatedBooks = [...books];           // สร้างสำเนาข้อมูลหนังสือ
+    const currentBook = updatedBooks[index];   // ดึงหนังสือที่เลือก
 
+    // เปลี่ยนสถานะการยืม
     if (currentBook.status === "ว่าง") {
       currentBook.status = "มีผู้ยืมแล้ว";
     } else {
       currentBook.status = "ว่าง";
     }
 
-    setBooks(updatedBooks);
-    saveBooks(updatedBooks);
+    setBooks(updatedBooks);        // อัพเดต state
+    saveBooks(updatedBooks);       // บันทึกข้อมูลใหม่
   };
 
+  // จัดการลบหนังสือ
   const handleDelete = (index) => {
-    const confirmDelete = window.confirm("คุณแน่ใจหรือไม่ว่าต้องการลบหนังสือเล่มนี้?");
+    const confirmDelete = window.confirm("คุณแน่ใจหรือไม่ว่าต้องการลบหนังสือเล่มนี้?"); // ยืนยันก่อนลบ
     if (!confirmDelete) return;
 
     const updatedBooks = [...books];
-    updatedBooks.splice(index, 1);
+    updatedBooks.splice(index, 1);   // ลบหนังสือตาม index ที่ระบุ
 
-    setBooks(updatedBooks);
-    saveBooks(updatedBooks);
+    setBooks(updatedBooks);          // อัพเดต state
+    saveBooks(updatedBooks);         // บันทึกข้อมูลใหม่
   };
 
+  // จัดการเมื่อผู้ใช้กดปุ่ม "แก้ไข" ตั้งค่าข้อมูลที่จะใช้แก้ไขในฟอร์ม
   const handleEdit = (index) => {
-    setEditIndex(index);
-    setEditBook({ id: books[index].id, title: books[index].title });
+    setEditIndex(index);                               // ระบุ index ของหนังสือที่กำลังแก้ไข
+    setEditBook({ id: books[index].id, title: books[index].title }); // เซ็ตค่าเดิมของหนังสือไปยัง editBook
   };
 
+  // จัดการบันทึกข้อมูลที่แก้ไขแล้ว
   const handleSaveEdit = () => {
     const updatedBooks = [...books];
     updatedBooks[editIndex] = {
-      ...updatedBooks[editIndex],
-      id: editBook.id,
-      title: editBook.title,
+      ...updatedBooks[editIndex],            // เก็บค่าที่ไม่ได้แก้ไขไว้ (เช่น status)
+      id: editBook.id,                       // อัพเดต id จากที่แก้ไข
+      title: editBook.title,                 // อัพเดต title จากที่แก้ไข
     };
 
-    setBooks(updatedBooks);
-    saveBooks(updatedBooks);
-    setEditIndex(null);
-    setEditBook({ id: "", title: "" });
+    setBooks(updatedBooks);                  // อัพเดต state
+    saveBooks(updatedBooks);                 // บันทึกข้อมูลใหม่
+    setEditIndex(null);                      // รีเซ็ตค่า editIndex (ยกเลิกโหมดแก้ไข)
+    setEditBook({ id: "", title: "" });      // เคลียร์ข้อมูล editBook
   };
 
+  // จัดการเพิ่มหนังสือใหม่
   const handleAddBook = () => {
-    if (!newBook.id || !newBook.title) {
+    if (!newBook.id || !newBook.title) {     // เช็คว่ากรอกข้อมูลครบไหม
       alert("กรุณากรอกรหัสและชื่อหนังสือให้ครบถ้วน");
       return;
     }
 
     const updatedBooks = [
-      ...books,
-      { id: newBook.id, title: newBook.title, status: "ว่าง" },
+      ...books,                                 // เก็บรายการหนังสือเดิมไว้
+      { id: newBook.id, title: newBook.title, status: "ว่าง" },  // เพิ่มรายการใหม่ โดยเริ่มต้นสถานะเป็น "ว่าง"
     ];
 
-    setBooks(updatedBooks);
-    saveBooks(updatedBooks);
-    setNewBook({ id: "", title: "" });
-    setShowAddForm(false);
+    setBooks(updatedBooks);                  // อัพเดต state
+    saveBooks(updatedBooks);                 // บันทึกข้อมูลใหม่
+    setNewBook({ id: "", title: "" });       // รีเซ็ตฟอร์มเพิ่มหนังสือ
+    setShowAddForm(false);                   // ปิดฟอร์มเพิ่มหนังสือ
   };
 
+  // ส่วนที่แสดงผล UI
   return (
     <div className={styles.container}>
       <h1>ระบบจัดการหนังสือ</h1>
 
+      {/* ส่วนค้นหาและปุ่มเพิ่มหนังสือ */}
       <div className={styles.topActions}>
         <input
           type="text"
@@ -98,13 +126,14 @@ export default function BookList() {
         />
 
         <button
-          onClick={() => setShowAddForm(!showAddForm)}
+          onClick={() => setShowAddForm(!showAddForm)} // เปิด/ปิดฟอร์มเพิ่มหนังสือ
           className={styles.addButton}
         >
           {showAddForm ? "ยกเลิก" : "เพิ่มหนังสือ"}
         </button>
       </div>
 
+      {/* ฟอร์มเพิ่มหนังสือ */}
       {showAddForm && (
         <div className={styles.addForm}>
           <input
@@ -123,6 +152,7 @@ export default function BookList() {
         </div>
       )}
 
+      {/* ตารางแสดงรายการหนังสือ */}
       <table className={styles.table}>
         <thead>
           <tr>
@@ -133,9 +163,11 @@ export default function BookList() {
           </tr>
         </thead>
         <tbody>
+          {/* วนลูปแสดงรายการหนังสือตาม search filter */}
           {filteredBooks.map((book, index) => (
             <tr key={index}>
               <td>
+                {/* ถ้าอยู่ในโหมดแก้ไข แสดง input */}
                 {editIndex === index ? (
                   <input
                     type="text"
@@ -164,15 +196,18 @@ export default function BookList() {
                     : styles.statusBorrowed
                 }
               >
+                {/* แสดงสถานะ */}
                 {book.status === "ว่าง" ? "พร้อมให้ยืม" : "ถูกยืมอยู่"}
               </td>
               <td>
+                {/* ถ้าอยู่ในโหมดแก้ไข แสดงปุ่มบันทึก */}
                 {editIndex === index ? (
                   <button onClick={handleSaveEdit} className={styles.saveButton}>
                     บันทึก
                   </button>
                 ) : (
                   <>
+                    {/* ปุ่มยืม/คืน */}
                     <button
                       onClick={() => handleBorrowReturn(index)}
                       className={
@@ -183,12 +218,14 @@ export default function BookList() {
                     >
                       {book.status === "ว่าง" ? "ยืมหนังสือ" : "คืนหนังสือ"}
                     </button>
+                    {/* ปุ่มแก้ไข */}
                     <button
                       onClick={() => handleEdit(index)}
                       className={styles.editButton}
                     >
                       แก้ไข
                     </button>
+                    {/* ปุ่มลบ */}
                     <button
                       onClick={() => handleDelete(index)}
                       className={styles.deleteButton}
