@@ -23,6 +23,8 @@ export default function BookList() {
   // state สำหรับเก็บข้อมูลหนังสือที่กำลังแก้ไข
   const [editBook, setEditBook] = useState({ id: "", title: "" });
 
+
+
   // โหลดข้อมูลหนังสือครั้งแรกตอนที่ component ถูก render
   useEffect(() => {
     setBooks(getBooks());  // ดึงข้อมูลหนังสือจาก storage หรือ mock data มาแสดง
@@ -105,6 +107,8 @@ export default function BookList() {
     setShowAddForm(false);                   // ปิดฟอร์มเพิ่มหนังสือ
   };
 
+
+  
   // ส่วนที่แสดงผล UI
   return (
     <div className={styles.container}>
