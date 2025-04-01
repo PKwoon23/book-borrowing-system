@@ -1,6 +1,6 @@
 "use client";
 
-import BookList from "../components/BookList";
+import BookList from "./BookList/page";
 
 export default function Home() {
   return (

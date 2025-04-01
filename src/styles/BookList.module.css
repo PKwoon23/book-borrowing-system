@@ -1,0 +1,204 @@
+.container {
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.searchInput {
+  width: 80%;
+  padding: 8px;
+  margin-bottom: 12px;
+}
+
+/* ปรับปุ่มต่างๆ ที่ใช้ */
+.addButton {
+  background-color: #0070f3;
+  color: rgb(0, 0, 0);
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+}
+
+.addButton:hover {
+  background-color: #005bb5;
+}
+
+.addForm button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.addForm input{
+  margin-right: 10px;
+  width: 30%;
+  padding: 8px;
+}
+
+.addForm button:hover {
+  background-color: #1e7e34;
+}
+
+/* ตารางแสดงรายการหนังสือ */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
+}
+
+.table th {
+  background-color: #f2f2f2;
+}
+
+/* สถานะของหนังสือ */
+.statusAvailable {
+  color: rgb(0, 176, 18);
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+
+.statusBorrowed {
+  color: rgb(220, 21, 21);
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+
+/* ปรับปุ่มต่างๆ ที่ใช้ในแต่ละสถานะ */
+.borrowButton {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  margin-right: 4px;
+  cursor: pointer;
+}
+
+.returnButton {
+  background-color: rgb(215, 62, 62);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  margin-right: 4px;
+  cursor: pointer;
+}
+
+.editButton {
+  background-color: #f5d163;
+  color: rgb(24, 11, 11);
+  border: none;
+  padding: 6px 12px;
+  margin-right: 4px;
+  cursor: pointer;
+}
+
+.deleteButton {
+  background-color: #de1529;
+  color: rgb(255, 255, 255);
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.saveButton {
+  background-color: #17a2b8;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+/* เพิ่ม media queries เพื่อให้ responsive */
+@media screen and (max-width: 768px) {
+  .searchInput {
+    width: 100%;
+  }
+
+  .topActions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .addForm {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .table th,
+  .table td {
+    padding: 8px;
+  }
+
+  /* ให้สีไม่หายเมื่อหน้าจอเล็ก */
+  .addButton {
+    background-color: #0070f3;
+    color: rgb(0, 0, 0);
+  }
+
+  .addButton:hover {
+    background-color: #005bb5;
+  }
+
+  .borrowButton {
+    background-color: green;
+    color: white;
+  }
+
+  .returnButton {
+    background-color: rgb(215, 62, 62);
+    color: white;
+  }
+
+  .editButton {
+    background-color: #f5d163;
+    color: rgb(24, 11, 11);
+  }
+
+  .deleteButton {
+    background-color: #de1529;
+    color: rgb(255, 255, 255);
+  }
+
+  .saveButton {
+    background-color: #17a2b8;
+    color: white;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .h1 {
+    font-size: 18px;
+  }
+
+  .table th,
+  .table td {
+    font-size: 12px;
+  }
+
+  .addForm input,
+  .addForm button {
+    font-size: 14px;
+  }
+
+  .borrowButton, .returnButton, .editButton, .deleteButton, .saveButton {
+    padding: 4px 8px;
+  }
+}

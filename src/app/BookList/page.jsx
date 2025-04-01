@@ -1,11 +1,6 @@
-// นำเข้า React hook: useState ใช้จัดการ state และ useEffect ใช้สำหรับ side effects (โหลดข้อมูลเมื่อ component เริ่มทำงาน)
 import { useState, useEffect } from "react";
-
-// นำเข้า CSS module สำหรับกำหนดสไตล์
-import styles from "./BookList.module.css";
-
-// นำเข้า function สำหรับดึงข้อมูลและบันทึกข้อมูลหนังสือ
-import { getBooks, saveBooks } from "../data/books";
+import styles from "../../styles/BookList.module.css";
+import { getBooks, saveBooks } from "../../data/books";
 
 // ประกาศ component หลัก
 export default function BookList() {
@@ -113,7 +108,7 @@ export default function BookList() {
   // ส่วนที่แสดงผล UI
   return (
     <div className={styles.container}>
-      <h1>ระบบจัดการหนังสือ</h1>
+      <h1 className="h1">ระบบจัดการหนังสือ</h1>
 
       {/* ส่วนค้นหาและปุ่มเพิ่มหนังสือ */}
       <div className={styles.topActions}>
