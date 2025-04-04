@@ -1,36 +1,170 @@
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# ระบบยืมคืนหนังสือ ( Book borrowing and return system )
 
-First, run the development server:
+โปรเจกต์นี้เป็นระบบจัดการหนังสือ ที่ช่วยให้ผู้ใช้สามารถ ค้นหา, ยืม, คืน, เพิ่ม, แก้ไข และลบหนังสือ ได้ โดยข้อมูลหนังสือจะถูกจัดเก็บไว้ใน localStorage
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## สารบัญ Table of Contents
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- [ฟีเจอร์หลัก Main features](#%E0%B8%9F%E0%B8%B5%E0%B9%80%E0%B8%88%E0%B8%AD%E0%B8%A3%E0%B9%8C%E0%B8%AB%E0%B8%A5%E0%B8%B1%E0%B8%81-main-features) 
+- [ตัวอย่างหน้าจอ Screen example](#%E0%B8%95%E0%B8%B1%E0%B8%A7%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%AB%E0%B8%99%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%AD-screen-example)
+- [เทคโนโลยีที่ใช้ Technology used](#%E0%B9%80%E0%B8%97%E0%B8%84%E0%B9%82%E0%B8%99%E0%B9%82%E0%B8%A5%E0%B8%A2%E0%B8%B5%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B9%83%E0%B8%8A%E0%B9%89-technology-used) 
+- [วิธีการติดตั้งและเริ่มต้นใช้งาน How to install and get started](#%E0%B8%A7%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%95%E0%B8%B4%E0%B8%94%E0%B8%95%E0%B8%B1%E0%B9%89%E0%B8%87%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B9%80%E0%B8%A3%E0%B8%B4%E0%B9%88%E0%B8%A1%E0%B8%95%E0%B9%89%E0%B8%99%E0%B9%83%E0%B8%8A%E0%B9%89%E0%B8%87%E0%B8%B2%E0%B8%99-how-to-install-and-get-started)
+- [โครงสร้างโปรเจกต์ Project Structure](#%E0%B9%82%E0%B8%84%E0%B8%A3%E0%B8%87%E0%B8%AA%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%87%E0%B9%82%E0%B8%9B%E0%B8%A3%E0%B9%80%E0%B8%88%E0%B8%81%E0%B8%95%E0%B9%8C-project-structure)
+- [รายละเอียดการทำงาน Job description](#%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%A5%E0%B8%B0%E0%B9%80%E0%B8%AD%E0%B8%B5%E0%B8%A2%E0%B8%94%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%97%E0%B8%B3%E0%B8%87%E0%B8%B2%E0%B8%99-job-description)
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## ฟีเจอร์หลัก Main features 
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- ค้นหาหนังสือตาม รหัส หรือ ชื่อหนังสือ
+- ยืม/คืนหนังสือ (สถานะ: ว่าง / มีผู้ยืมแล้ว)
+- เพิ่มหนังสือใหม่
+- แก้ไขข้อมูลหนังสือ
+- ลบหนังสือ
 
-## Learn More
+## ตัวอย่างหน้าจอ Screen example
 
-To learn more about Next.js, take a look at the following resources:
+![Screenshot 2025-04-03 154139](https://github.com/user-attachments/assets/cdba1f8e-7c17-4022-ba1e-78b7f827b6ac)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## เทคโนโลยีที่ใช้ Technology used 
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+ - Next.js 14+ (App Router) → จัดการ UI และ Routing
+ - React (Client Components & Hooks) → ใช้สำหรับจัดการ UI
+ - JavaScript (ES6+) → ใช้สำหรับการเขียนฟังก์ชันและการจัดการกับ state
+ - Tailwind CSS + CSS modules → ใช้ตกแต่ง UI
+ - localStorage → ใช้เก็บข้อมูลฝั่ง Client
 
-## Deploy on Vercel
+## วิธีการติดตั้งและเริ่มต้นใช้งาน How to install and get started
+1.Clone โปรเจกต์
+- เริ่มต้นด้วยการ clone โปรเจกต์นี้ไปยังเครื่องของคุณ
+	
+		git clone https://github.com/PKwoon23/book-borrowing-system.git
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2.ตรวจสอบการติดตั้ง Node.js และ npm
+- ตรวจสอบว่าเครื่องของคุณติดตั้ง Node.js และ npm แล้วหรือยัง โดยใช้คำสั่ง:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+      node -v
+      npm -v
+
+หากยังไม่ได้ติดตั้ง Node.js และ npm คุณสามารถดาวน์โหลดได้ที่ Node.js official website.
+
+3.เข้าไปยังโฟลเดอร์โปรเจ็ก	
+- เข้าไปยังโฟลเดอร์ที่คุณ clone โปรเจกต์:
+	
+	  cd book-management-system		
+			
+4.ติดตั้ง dependencies
+- ติดตั้ง dependencies ที่จำเป็นโดยการใช้คำสั่ง:
+
+		npm install
+		
+5.รันโปรเจ็กในโหมดพัฒนา
+- รันโปรเจกต์ในโหมดพัฒนาโดยใช้คำสั่ง:
+	
+	  npm run dev
+	
+โปรเจ็คจะรันที่ http://localhost:3000
+* ข้อมูลที่เก็บใน localStorage จะถูกบันทึกไว้ในเครื่องผู้ใช้ แต่อยู่ในรูปแบบที่ไม่สามารถแชร์ข้ามเครื่องได้ 
+
+## โครงสร้างโปรเจกต์ Project Structure
+
+![Screenshot 2025-04-03 160407](https://github.com/user-attachments/assets/4550aed2-fcb9-4751-b4e2-90e856eb9483)
+
+**`src/`**: โฟลเดอร์หลักของแอปพลิเคชัน
+
+-   **`app/`**: โฟลเดอร์ที่ใช้สำหรับจัดการส่วนต่างๆ ของแอปพลิเคชัน เช่น คอมโพเนนต์หน้า BookList
+    
+    -   **`BookList/`**: คอมโพเนนต์รายการหนังสือ
+        
+        -   **`page.jsx`**: คอมโพเนนต์ที่แสดงรายการหนังสือ
+            
+    -   **`page.js`**: หน้าแรกของแอปพลิเคชัน
+        
+-   **`data/`**: โฟลเดอร์ที่ใช้ในการจัดการข้อมูลหนังสือ
+    
+    -   **`books.js`**: ฟังก์ชันจัดการข้อมูลใน `localStorage` เช่น การดึงข้อมูลและบันทึก
+        
+-   **`styles/`**: โฟลเดอร์ที่เก็บไฟล์ CSS สำหรับการตกแต่ง
+    
+    -   **`BookList.module.css`**: สไตล์ที่ใช้ในคอมโพเนนต์ BookList
+
+## รายละเอียดการทำงาน Job description
+
+### รายละเอียดฟังก์ชันการทำงานหลัก
+
+1.  **การแสดงรายการหนังสือ**
+    
+    -   รายการหนังสือจะถูกเก็บใน `state` และดึงข้อมูลจาก `localStorage` เมื่อโหลดหน้าเพจครั้งแรก
+        
+    -   ข้อมูลหนังสือประกอบด้วย `id`, `title`, และ `status` (สถานะเช่น "ว่าง" หรือ "มีผู้ยืมแล้ว")
+        
+    -   หนังสือแต่ละเล่มจะสามารถแสดงในตาราง โดยแสดงข้อมูล `id`, `title`, และ `status` (เช่น "พร้อมให้ยืม" หรือ "ถูกยืมอยู่")
+        
+2.  **การค้นหาหนังสือ**
+    
+    -   มีช่องค้นหาหนังสือที่ผู้ใช้สามารถกรอกคำค้นหาหรือรหัสหนังสือเพื่อกรองรายการหนังสือที่แสดง
+        
+3.  **การเพิ่มหนังสือใหม่**
+    
+    -   ผู้ใช้สามารถกดปุ่มเพิ่มหนังสือเพื่อแสดงฟอร์มกรอกข้อมูลหนังสือใหม่ โดยระบุ `id` และ `title`
+        
+    -   เมื่อเพิ่มหนังสือใหม่, ระบบจะทำการเก็บข้อมูลหนังสือใน `localStorage`
+        
+4.  **การแก้ไขข้อมูลหนังสือ**
+    
+    -   ผู้ใช้สามารถกดปุ่ม "แก้ไข" เพื่อแก้ไขข้อมูลของหนังสือ (รหัสและชื่อหนังสือ)
+        
+    -   เมื่อแก้ไขเสร็จ, ผู้ใช้สามารถกด "บันทึก" เพื่อบันทึกการเปลี่ยนแปลงลงใน `localStorage`
+        
+5.  **การลบหนังสือ**
+    
+    -   ผู้ใช้สามารถลบหนังสือจากระบบได้ โดยระบบจะยืนยันการลบก่อนการลบจริง
+        
+    -   เมื่อทำการลบ, ระบบจะอัพเดตข้อมูลใน `localStorage`
+        
+6.  **การยืม/คืนหนังสือ**
+    
+    -   ผู้ใช้สามารถกดปุ่ม "ยืมหนังสือ" หรือ "คืนหนังสือ" เพื่อเปลี่ยนสถานะของหนังสือจาก "ว่าง" เป็น "มีผู้ยืมแล้ว" หรือจาก "มีผู้ยืมแล้ว" เป็น "ว่าง"
+        
+    -   เมื่อเปลี่ยนสถานะ, ระบบจะอัพเดตข้อมูลใน `localStorage`
+        
+
+### การจัดการข้อมูลหนังสือ
+
+-   ข้อมูลหนังสือเริ่มต้นถูกกำหนดในตัวแปร `booksData` และเมื่อเปิดโปรเจกต์ครั้งแรก, ระบบจะเช็คว่า `localStorage` มีข้อมูลหรือไม่ หากไม่มี, จะตั้งค่าข้อมูลเริ่มต้นใน `localStorage`
+    
+-   ฟังก์ชัน `getBooks()` ดึงข้อมูลจาก `localStorage` หากไม่มีข้อมูลใน `localStorage` จะใช้ข้อมูลเริ่มต้น
+    
+-   ฟังก์ชัน `saveBooks(data)` ใช้ในการบันทึกข้อมูลใหม่ที่ถูกอัพเดตกลับลงใน `localStorage`
+    
+
+### ฟังก์ชันการทำงานต่างๆ
+
+-   **handleSearch**: ใช้สำหรับจัดการการค้นหาหนังสือ โดยจะกรองหนังสือตามชื่อหรือรหัสหนังสือที่ผู้ใช้กรอก
+    
+-   **handleBorrowReturn**: ใช้สำหรับการยืมและคืนหนังสือ โดยจะเปลี่ยนสถานะของหนังสือจาก "ว่าง" เป็น "มีผู้ยืมแล้ว" หรือกลับกัน
+    
+-   **handleDelete**: ใช้สำหรับลบหนังสือ โดยจะมีการยืนยันก่อนการลบ
+    
+-   **handleEdit**: ใช้สำหรับแก้ไขข้อมูลหนังสือ
+    
+-   **handleSaveEdit**: ใช้สำหรับบันทึกการเปลี่ยนแปลงที่เกิดขึ้นจากการแก้ไข
+    
+-   **handleAddBook**: ใช้สำหรับเพิ่มหนังสือใหม่เข้าระบบ
+    
+
+### การออกแบบ UI
+
+-   ใช้ตาราง (table) ในการแสดงรายการหนังสือ
+    
+-   ปรับการแสดงผลให้สามารถใช้ได้ดีทั้งในอุปกรณ์ที่มีหน้าจอขนาดเล็กและใหญ่ (responsive design)
+    
+-   แต่ละปุ่มใน UI จะมีสีที่แตกต่างกันเพื่อให้ผู้ใช้สามารถแยกแยะการกระทำต่างๆ เช่น ปุ่ม "ยืมหนังสือ", "คืนหนังสือ", "แก้ไข", "ลบ", และ "บันทึก"
+    
+
+### สไตล์ (CSS)
+
+-   ใช้ `BookList.module.css` เพื่อจัดการสไตล์ของคอมโพเนนต์ `BookList` ให้เหมาะสมกับการแสดงผล
+    
+-   ใช้ media queries เพื่อรองรับการแสดงผลในอุปกรณ์ต่างๆ เช่น โทรศัพท์มือถือและแท็บเล็ต
